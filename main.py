@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import cgi
 import webapp2
 import urllib
 import re
 USER_RE = re.compile (r"^[a-zA-Z0-9_-]{3,20}$")
-PASS_RE = re.compile (r"^.{3,`20`}$")
+PASS_RE = re.compile (r"^.{3,20}$")
 EMAIL_RE = re.compile (r"^[\S]+@[\S]+\.[\S]+$")
 
 def valid_username(username):
@@ -150,7 +151,7 @@ class Sucess(webapp2.RequestHandler):
     def get(self):
         username = (self.request.get("username"))
 
-        self.response.write("<h1>Suckcess"+ " " + str(username) +"</h1>")
+        self.response.write("<h1>Suckcess"+ " " + cgi.escape(username) +"</h1>")
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
